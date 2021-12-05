@@ -14,7 +14,15 @@ function App() {
   {
     palette: 
     {
-      mode: darkMode ? 'dark' : 'light'
+      mode: darkMode ? 'dark' : 'light',
+      primary: 
+      {
+        main: '#003BA3'
+      },
+      secondary:
+      {
+        main: '#7AABFF'
+      }
     }
   })
 
@@ -22,17 +30,11 @@ function App() {
     <Router>
       <ThemeProvider theme={muiTheme}>
         <MuiAppBar setDarkMode={setDarkMode} darkMode={darkMode}>
-            <Paper style={{height: "100vh"}}>
-              <Grid>
-                <div className="App">
-                  <header className="App-header">
-                    <p>
-                      Design Time!!!
-                    </p>
-                  </header>
-                </div>
-              </Grid>
-            </Paper>
+            <Grid>
+              <Paper>
+                
+              </Paper>
+            </Grid>
         </MuiAppBar>
       </ThemeProvider>
     </Router>
