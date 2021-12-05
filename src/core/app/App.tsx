@@ -4,7 +4,7 @@ import {Grid, Paper} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
 
-import MuiAppBar from '../../nav/MuiAppBar';
+import MuiAppBar from '../../navigation/appBar/MuiAppBar';
 
 
 function App() {
