@@ -1,30 +1,65 @@
-import React, {useState} from 'react'
+import React from 'react'
 import 
 {
-    SwipeableDrawer, Button, List, Divider, ListItem, 
-    ListItemIcon, ListItemText 
+    SwipeableDrawer, List, Divider, ListItem, 
+    ListItemIcon, ListItemText, Box
 } 
 from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
+//TODO: Start implementing testing
+///Testing all on front end elements
+////Maybe make a fake form to test?
+//TODO: Finish drawer
+//TODO: Begin Blog Mainpage(create simple backend? Use api?)
+///https://jsonplaceholder.typicode.com/
+
 interface BlogDrawerProps 
 {
-    
+    drawerOpen: boolean;
+    setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BlogDrawer = (props: BlogDrawerProps) => 
 {
-    const [drawerStatus, setDrawerStatus] = useState(false);
+    const {drawerOpen, setDrawerOpen} = props
     return (
         <SwipeableDrawer
             anchor={"left"}
-            open={drawerStatus}
-            onClose={() =>{setDrawerStatus(false)}}
-            onOpen={() =>{setDrawerStatus(true)}}
-          >
-            
-        </SwipeableDrawer>
+            open={drawerOpen}
+            onClose={() =>{setDrawerOpen(false)}}
+            onOpen={() =>{setDrawerOpen(true)}}
+         >
+             <Box
+                sx={{ width: 250 }}
+                role="presentation"
+                onClick={() =>{setDrawerOpen(false)}}
+                onKeyDown={() =>{setDrawerOpen(false)}}
+            >
+            <List>
+            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                <ListItem button key={text}>
+                    <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                </ListItem>
+            ))}
+            </List>
+            <Divider />
+            <List>
+                {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                <ListItem button key={text}>
+                    <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    </ListItemIcon>
+                    <ListItemText primary={text} />
+                </ListItem>
+                ))}
+            </List>
+            </Box>
+         </SwipeableDrawer>
     )
 }
 

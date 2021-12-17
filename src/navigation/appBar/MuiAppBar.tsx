@@ -1,7 +1,11 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import {AppBar, Toolbar, Typography, CssBaseline, useScrollTrigger, Slide, IconButton} from '@mui/material';
+
 import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
- import Brightness6Icon from '@mui/icons-material/Brightness6';
+import Brightness6Icon from '@mui/icons-material/Brightness6';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+
+import BlogDrawer from '../drawer/BlogDrawer';
 
 interface AppBarProps 
 {
@@ -25,7 +29,22 @@ function HideOnScroll(appBarProps: AppBarProps)
 function MuiAppBar(appBarProps: AppBarProps): ReactElement 
 {
   const {setDarkMode, darkMode} = appBarProps;
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const toggleDarkMode = () =>
+  {
+    if(!!localStorage.getItem('darkModeCheck'))
+    {
+        localStorage.removeItem('darkModeCheck');
+        setDarkMode(false);
+    }
+    else
+    {
+        localStorage.setItem('darkModeCheck', 'darkModeActive');
+        setDarkMode(true);
+    }
+  }
 
+  
     return (
     <React.Fragment>
       <CssBaseline />
@@ -33,16 +52,20 @@ function MuiAppBar(appBarProps: AppBarProps): ReactElement
           <AppBar>
             <Toolbar>
               <DeveloperModeIcon/>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} data-testid='appName'>
                 Best Blog Bro
               </Typography>
-              <IconButton onClick={() =>{ setDarkMode(!darkMode)}}>
+              <IconButton onClick={() =>{ setDrawerOpen(true)}}>
+                <MenuOpenIcon/>
+              </IconButton>
+              <IconButton onClick={() =>{ toggleDarkMode();}}>
                 <Brightness6Icon/>
               </IconButton>
             </Toolbar>
           </AppBar>
         </HideOnScroll>
       <Toolbar />
+          <BlogDrawer setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen}/>
     </React.Fragment>
     )
 }

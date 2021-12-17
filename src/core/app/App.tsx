@@ -1,43 +1,24 @@
-import React, {useState } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom'; 
-import {Grid, Paper} from '@mui/material';
+import {useState } from 'react';
+import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom'; 
+import {Grid} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
-
+import BlogMainPage from '../../pages/BlogMainPage';
 import MuiAppBar from '../../navigation/appBar/MuiAppBar';
-
+import BlogLayout from '../../components/layout/BlogLayout';
 
 function App() {
 
-  const [darkMode, setDarkMode] = useState(false);
-  const muiTheme = createTheme(
-  {
-    palette: 
-    {
-      mode: darkMode ? 'dark' : 'light',
-      primary: 
-      {
-        main: '#003BA3'
-      },
-      secondary:
-      {
-        main: '#7AABFF'
-      }
-    }
-  })
+
 
   return (
-    <Router>
-      <ThemeProvider theme={muiTheme}>
-        <MuiAppBar setDarkMode={setDarkMode} darkMode={darkMode}>
-            <Grid>
-              <Paper>
-                
-              </Paper>
-            </Grid>
-        </MuiAppBar>
-      </ThemeProvider>
-    </Router>
+        <Router>
+              <Routes>
+                <Route path="/" element={<BlogLayout />}>
+                  <Route path="blogmainpage" element={<BlogMainPage />}/>
+                </Route>
+              </ Routes>
+        </Router>
   );
 }
 
