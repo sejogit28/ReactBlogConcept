@@ -8,12 +8,6 @@ from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-//TODO: Start implementing testing
-///Testing all on front end elements
-////Maybe make a fake form to test?
-//TODO: Finish drawer
-//TODO: Begin Blog Mainpage(create simple backend? Use api?)
-///https://jsonplaceholder.typicode.com/
 
 interface BlogDrawerProps 
 {

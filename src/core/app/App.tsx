@@ -1,21 +1,25 @@
-import {useState } from 'react';
-import {BrowserRouter as Router, Routes, Route, Outlet} from 'react-router-dom'; 
-import {Grid} from '@mui/material';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'; 
 
 import BlogMainPage from '../../pages/BlogMainPage';
-import MuiAppBar from '../../navigation/appBar/MuiAppBar';
 import BlogLayout from '../../components/layout/BlogLayout';
 
 function App() {
 
+//TODO: Infini Scroll?
+//TODO: Set up blog preview drawer
+//TODO: Create view blog page
+//TODO: Make picture different based off post
+//TODO: Start implementing testing
+///Testing all on front end elements
+////Maybe make a fake form to test?
+//TODO: Finish drawer
 
 
   return (
         <Router>
               <Routes>
-                <Route path="/" element={<BlogLayout />}>
-                  <Route path="blogmainpage" element={<BlogMainPage />}/>
+                <Route element={<BlogLayout />}>
+                  <Route path="/" element={<BlogMainPage />}/>
                 </Route>
               </ Routes>
         </Router>

@@ -1,38 +1,86 @@
-import React from 'react';
-import {Box, Card, CardContent, CardMedia, IconButton, Typography, Grid } from '@mui/material';
+import { Children, useState, useEffect } from 'react';
+import 
+{
+  Card, 
+  CardContent, 
+  CardMedia, 
+  CardActions,
+  CardActionArea,
+  IconButton,
+  Tooltip,
+  Zoom,
+  Typography, 
+  Grid 
+} from '@mui/material';
+
+import { randomDate } from '../../services/Utils';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
-interface Props {
-    
+import PreviewIcon from '@mui/icons-material/Preview';
+
+interface BlogCardProps {
+  id: number;
+  title: string;
+  summary: string;
+  body: string;
+  userId: number;
+  readTime: number; 
+
 }
 
-const FeaturedBlogCard = (blogCardProps: Props) => {
-    return (
+const FeaturedBlogCard = (props: BlogCardProps) => 
+{
+  const [randomDateString, setRandomDateString] = useState<string>("");
+  useEffect(() => {
+    setRandomDateString(randomDate().toLocaleString());
+    
+  }, [])
+  const LinkToBlogPage = ({children}: any) => 
+  {
+    return(
+      <CardActionArea  component="a" href="#" >
+        {children}
+      </CardActionArea>
+    );
+  }
   
-  <Grid item xs={12}>
-    <Card sx={{ display: 'flex', margin: '1rem' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            Featured Blog Post
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Mac Miller
-          </Typography>
-        </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <IconButton >
-            <ReadMoreIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
-        </Box>
-      </Box>
-      <CardMedia
-        component="img"
-        image="StelvioPassItaly.jpg"
-        alt="Live from space album cover"
-      />
-    </Card>
-  </Grid>
-    )
+  return (
+  
+      <Grid item xs={12} sm={10}>
+        <Card sx={{ display: 'flex' }}>
+          <LinkToBlogPage>
+          <CardContent sx={{ flex: '1' }}>
+            <Typography component="h2" variant="h5">
+              {props.title}
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary">
+              {randomDateString}
+            </Typography>
+            <Typography variant="subtitle1" paragraph>
+              {props.summary}
+            </Typography>
+          
+          </CardContent>
+          </LinkToBlogPage>
+            <CardActions>
+              <Tooltip title="Read More" arrow TransitionComponent={Zoom}>
+                <IconButton size='large' href='#' color="primary">
+                  <ReadMoreIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Preview Article" arrow TransitionComponent={Zoom}>
+                <IconButton size='large' onClick={()=>{console.log('Eventual preview!!!')}}>
+                  <PreviewIcon />
+                </IconButton>
+              </Tooltip>
+            </CardActions>
+          <CardMedia
+            component="img"
+            sx={{ width: 160}}
+            image='StelvioPassItaly.jpg'
+            alt='Picture of Stelvio Pass, Italy'
+          />
+        </Card>
+      </Grid>    )
 }
 
 export default FeaturedBlogCard

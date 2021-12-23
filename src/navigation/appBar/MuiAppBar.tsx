@@ -28,7 +28,7 @@ function HideOnScroll(appBarProps: AppBarProps)
 
 function MuiAppBar(appBarProps: AppBarProps): ReactElement 
 {
-  const {setDarkMode, darkMode} = appBarProps;
+  const {setDarkMode} = appBarProps;
   const [drawerOpen, setDrawerOpen] = useState(false);
   const toggleDarkMode = () =>
   {
@@ -55,7 +55,7 @@ function MuiAppBar(appBarProps: AppBarProps): ReactElement
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} data-testid='appName'>
                 Best Blog Bro
               </Typography>
-              <IconButton onClick={() =>{ setDrawerOpen(true)}}>
+              <IconButton onClick={() =>{ setDrawerOpen(true);}}>
                 <MenuOpenIcon/>
               </IconButton>
               <IconButton onClick={() =>{ toggleDarkMode();}}>
