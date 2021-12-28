@@ -1,0 +1,19 @@
+.card-container {
+  display: flex;
+}
+@media all and (max-width: 800px) {
+  .card-container {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    flex-direction: column;
+  }
+  .card-content-container {
+    order: 2;
+  }
+  .card-actions-container {
+    order: 3;
+  }
+  .card-media-container {
+    order: 1;
+    width: auto;
+  }
+}

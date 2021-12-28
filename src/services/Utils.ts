@@ -1,4 +1,4 @@
-//Concerns utilities to get random data
+//Concerns utilities to get random/fake data
 export const JsonPlaceHolderURI = 'https://jsonplaceholder.typicode.com/';
 export const postServiceName = 'posts';
 export const commentServiceName = 'comment';
@@ -9,8 +9,8 @@ const loremIpsumString = "Lorem ipsum dolor sit amet, consectetur adipiscing eli
 "Amet luctus venenatis lectus magna fringilla. Vel pharetra vel turpis nunc. Fringilla";
 export const loremIpsumSummaryString = loremIpsumString.substring(10, 45);
 
-export function randomIntFromInterval(): number { 
-  return Math.floor(Math.random() * (20 - 1 + 1) + 1)
+export function randomInt(max: number): number { 
+return Math.floor(Math.random() * max);
 }
 
 export function randomDate(start = new Date(2021, 6, 12), end = new Date()): Date {

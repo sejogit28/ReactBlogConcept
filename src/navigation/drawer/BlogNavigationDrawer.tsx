@@ -9,13 +9,13 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 
-interface BlogDrawerProps 
+interface BlogNavigationDrawerProps 
 {
     drawerOpen: boolean;
     setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const BlogDrawer = (props: BlogDrawerProps) => 
+const BlogNavigationDrawer = (props: BlogNavigationDrawerProps) => 
 {
     const {drawerOpen, setDrawerOpen} = props
     return (
@@ -57,4 +57,4 @@ const BlogDrawer = (props: BlogDrawerProps) =>
     )
 }
 
-export default BlogDrawer
+export default BlogNavigationDrawer

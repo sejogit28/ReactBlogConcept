@@ -1,4 +1,4 @@
-import { Children, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import 
 {
   Card, 
@@ -13,9 +13,11 @@ import
   Grid 
 } from '@mui/material';
 
-import { randomDate } from '../../services/Utils';
+import { randomDate, randomInt } from '../../services/Utils';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import PreviewIcon from '@mui/icons-material/Preview';
+
+import '../../styles/css/FeaturedBlogCard.css'
 
 interface BlogCardProps {
   id: number;
@@ -29,15 +31,19 @@ interface BlogCardProps {
 
 const FeaturedBlogCard = (props: BlogCardProps) => 
 {
-  const [randomDateString, setRandomDateString] = useState<string>("");
+  const { id, title, summary } = props
+  const [randomDateString, setRandomDateString] = useState("");
+  const [photoString, setPhotoString] = useState("");
   useEffect(() => {
     setRandomDateString(randomDate().toLocaleString());
+    console.log(randomInt(100));
+    setPhotoString(`https://picsum.photos/id/${id}/200/100`);
     
-  }, [])
+  }, [id])
   const LinkToBlogPage = ({children}: any) => 
   {
     return(
-      <CardActionArea  component="a" href="#" >
+      <CardActionArea className='card-content-container' component="a" href="#" >
         {children}
       </CardActionArea>
     );
@@ -46,22 +52,22 @@ const FeaturedBlogCard = (props: BlogCardProps) =>
   return (
   
       <Grid item xs={12} sm={10}>
-        <Card sx={{ display: 'flex' }}>
+        <Card className='card-container'>
           <LinkToBlogPage>
-          <CardContent sx={{ flex: '1' }}>
+          <CardContent  className='card-content-container'>
             <Typography component="h2" variant="h5">
-              {props.title}
+              {title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
               {randomDateString}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {props.summary}
+              {summary}
             </Typography>
           
           </CardContent>
           </LinkToBlogPage>
-            <CardActions>
+            <CardActions className='card-actions-container'>
               <Tooltip title="Read More" arrow TransitionComponent={Zoom}>
                 <IconButton size='large' href='#' color="primary">
                   <ReadMoreIcon />
@@ -74,9 +80,10 @@ const FeaturedBlogCard = (props: BlogCardProps) =>
               </Tooltip>
             </CardActions>
           <CardMedia
+            className='card-media-container'
             component="img"
-            sx={{ width: 160}}
-            image='StelvioPassItaly.jpg'
+            sx={{ width: 'auto'}}
+            image={photoString}
             alt='Picture of Stelvio Pass, Italy'
           />
         </Card>

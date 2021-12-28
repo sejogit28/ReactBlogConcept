@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Grid, Stack, Divider, Fab, Zoom } from '@mui/material';
+import { Grid, Stack, Divider, Fab, Zoom, Button } from '@mui/material';
 import { SxProps } from '@mui/system';
-import { useTheme } from '@mui/material/styles';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-import BlogPostService from '../services/BlogPostService';
-import FeaturedBlogCard from '../components/Cards/FeaturedBlogCard'
-import { loremIpsumSummaryString, randomIntFromInterval } from '../services/Utils';
+import BlogPostService from '../../services/BlogPostService';
+import FeaturedBlogCard from '../../components/Cards/FeaturedBlogCard'
 
 interface BlogMainPageProps {
 
@@ -15,6 +13,8 @@ interface BlogMainPageProps {
 const BlogMainPage = (blogMainPageProps: BlogMainPageProps) => {
 
     const[blogMainPageData, setBlogMainPageData] = useState([]);
+    const[blogMainPageDataCurrentLength, setBlogMainPageDataCurrentLength] = useState(10);
+    const[dataLoaded, setDataLoaded] = useState(false);
     const[showFab, setShowFab] = useState(false);
 
     useEffect(() => {
@@ -24,23 +24,31 @@ const BlogMainPage = (blogMainPageProps: BlogMainPageProps) => {
             {
                 console.log(mainPageData);
                 setBlogMainPageData(mainPageData);
+                
             })
+            setDataLoaded(true);
         }
         loadMainPageData();
         return () =>
         {
             window.removeEventListener('scroll', toggleVisible);
         }
-    }, []);
+    }, [blogMainPageDataCurrentLength]);
+
     const scrollToTop = () =>
     {
-        window.scrollTo({
-        top: 0, 
-        behavior: 'smooth'
-        /* you can also use 'auto' behaviour
-            in place of 'smooth' */
+        window.scrollTo(
+        {
+            top: 0, 
+            behavior: 'smooth'
+            /* you can also use 'auto' behaviour in place of 'smooth' but smooth is less jarring*/
         });
     };
+
+    const continuesInfiniScroll = () => 
+    {
+        setBlogMainPageDataCurrentLength(blogMainPageDataCurrentLength + 10);
+    }
     const toggleVisible = () => {
         const scrolled = document.documentElement.scrollTop;
         if (scrolled > 250){
@@ -66,21 +74,30 @@ const BlogMainPage = (blogMainPageProps: BlogMainPageProps) => {
             <Grid item xs={12} container>
                 <Grid item xs={12} md={8}>
                     <Stack spacing={6}>
-                        {blogMainPageData && blogMainPageData.map((blogPostData: any) =>
+                        {blogMainPageData && blogMainPageData.filter((item, index) => index < blogMainPageDataCurrentLength).map((blogPostData: any, index: number) =>
                         {
                             return(
-                                <FeaturedBlogCard 
-                                key={blogPostData.id}
-                                id={blogPostData.id}
-                                userId={blogPostData.userId}
-                                title={blogPostData.title}
-                                summary={blogPostData.summary}
-                                body={blogPostData.body}
-                                readTime={blogPostData.readTime}
-                                />
+                                <>
+                                    <FeaturedBlogCard 
+                                    key={blogPostData.id}
+                                    id={blogPostData.id}
+                                    userId={blogPostData.userId}
+                                    title={blogPostData.title}
+                                    summary={blogPostData.summary}
+                                    body={blogPostData.body}
+                                    readTime={blogPostData.readTime}
+                                    />
+                                </>
                             );
                         })}
                         
+                        {
+                            dataLoaded &&
+                         blogMainPageData.length !== blogMainPageDataCurrentLength && 
+                            <Button color="secondary" onClick={()=>{continuesInfiniScroll()}}>
+                                Show More?
+                            </Button>
+                        }
                     </Stack>
                 </Grid>
                 <Divider orientation='vertical' variant="middle" flexItem  />

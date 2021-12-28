@@ -3,8 +3,6 @@ import
     JsonPlaceHolderURI, 
     commentServiceName, 
     postServiceName, 
-    loremIpsumSummaryString,
-    randomIntFromInterval
 } from "./Utils";
 
 

@@ -5,7 +5,7 @@ import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
 import Brightness6Icon from '@mui/icons-material/Brightness6';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
-import BlogDrawer from '../drawer/BlogDrawer';
+import BlogNavigationDrawer from '../drawer/BlogNavigationDrawer';
 
 interface AppBarProps 
 {
@@ -65,7 +65,7 @@ function MuiAppBar(appBarProps: AppBarProps): ReactElement
           </AppBar>
         </HideOnScroll>
       <Toolbar />
-          <BlogDrawer setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen}/>
+          <BlogNavigationDrawer setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen}/>
     </React.Fragment>
     )
 }
