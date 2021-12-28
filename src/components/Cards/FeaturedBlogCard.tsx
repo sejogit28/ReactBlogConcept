@@ -18,6 +18,7 @@ import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import PreviewIcon from '@mui/icons-material/Preview';
 
 import '../../styles/css/FeaturedBlogCard.css'
+import BlogPreviewDrawer from '../../pages/components/BlogPreviewDrawer';
 
 interface BlogCardProps {
   id: number;
@@ -31,9 +32,10 @@ interface BlogCardProps {
 
 const FeaturedBlogCard = (props: BlogCardProps) => 
 {
-  const { id, title, summary } = props
+  const { id, title, summary, body } = props
   const [randomDateString, setRandomDateString] = useState("");
   const [photoString, setPhotoString] = useState("");
+  const [previewDrawerOpen, setPreviewDrawerOpen] = useState(false);
   useEffect(() => {
     setRandomDateString(randomDate().toLocaleString());
     console.log(randomInt(100));
@@ -48,9 +50,18 @@ const FeaturedBlogCard = (props: BlogCardProps) =>
       </CardActionArea>
     );
   }
+  const opensPreviewDrawer = (): void => 
+  {
+    setPreviewDrawerOpen(true);
+  }
+
+  const setsPreviewDrawerClosed = (): void =>
+  {
+    setPreviewDrawerOpen(false);
+  }
   
   return (
-  
+    <>
       <Grid item xs={12} sm={10}>
         <Card className='card-container'>
           <LinkToBlogPage>
@@ -74,7 +85,7 @@ const FeaturedBlogCard = (props: BlogCardProps) =>
                 </IconButton>
               </Tooltip>
               <Tooltip title="Preview Article" arrow TransitionComponent={Zoom}>
-                <IconButton size='large' onClick={()=>{console.log('Eventual preview!!!')}}>
+                <IconButton size='large' onClick={()=>{opensPreviewDrawer();}}>
                   <PreviewIcon />
                 </IconButton>
               </Tooltip>
@@ -87,7 +98,18 @@ const FeaturedBlogCard = (props: BlogCardProps) =>
             alt='Picture of Stelvio Pass, Italy'
           />
         </Card>
-      </Grid>    )
+      </Grid> 
+      <BlogPreviewDrawer 
+        key={id} 
+        id={id} 
+        title={title} 
+        post={body} 
+        previewDrawerOpen={previewDrawerOpen} 
+        setsPreviewDrawerOpen={opensPreviewDrawer}
+        setsPreviewDrawerClosed={setsPreviewDrawerClosed}
+      />
+    </>
+         )
 }
 
 export default FeaturedBlogCard

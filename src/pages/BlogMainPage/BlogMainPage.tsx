@@ -79,13 +79,13 @@ const BlogMainPage = (blogMainPageProps: BlogMainPageProps) => {
                             return(
                                 <>
                                     <FeaturedBlogCard 
-                                    key={blogPostData.id}
-                                    id={blogPostData.id}
-                                    userId={blogPostData.userId}
-                                    title={blogPostData.title}
-                                    summary={blogPostData.summary}
-                                    body={blogPostData.body}
-                                    readTime={blogPostData.readTime}
+                                        key={blogPostData.id}
+                                        id={blogPostData.id}
+                                        userId={blogPostData.userId}
+                                        title={blogPostData.title}
+                                        summary={blogPostData.summary}
+                                        body={blogPostData.body}
+                                        readTime={blogPostData.readTime}
                                     />
                                 </>
                             );
