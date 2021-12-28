@@ -18,7 +18,7 @@ import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import PreviewIcon from '@mui/icons-material/Preview';
 
 import '../../styles/css/FeaturedBlogCard.css'
-import BlogPreviewDrawer from '../../pages/components/BlogPreviewDrawer';
+import BlogPreviewDrawer from './BlogPreviewDrawer';
 
 interface BlogCardProps {
   id: number;

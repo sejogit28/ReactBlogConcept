@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Grid, Stack, Divider, Fab, Zoom, Button } from '@mui/material';
+import { useState } from 'react';
+import { Grid, Divider, Fab, Zoom } from '@mui/material';
 import { SxProps } from '@mui/system';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-import BlogPostService from '../../services/BlogPostService';
-import FeaturedBlogCard from '../../components/Cards/FeaturedBlogCard'
+import BlogCardSection from '../components/BlogCardSection';
+import ChipSection from '../components/ChipSection';
 
 interface BlogMainPageProps {
 
@@ -12,28 +12,8 @@ interface BlogMainPageProps {
 
 const BlogMainPage = (blogMainPageProps: BlogMainPageProps) => {
 
-    const[blogMainPageData, setBlogMainPageData] = useState([]);
-    const[blogMainPageDataCurrentLength, setBlogMainPageDataCurrentLength] = useState(10);
-    const[dataLoaded, setDataLoaded] = useState(false);
     const[showFab, setShowFab] = useState(false);
 
-    useEffect(() => {
-        const loadMainPageData = async () =>
-        {
-            await BlogPostService.getsAllPosts().then(mainPageData => 
-            {
-                console.log(mainPageData);
-                setBlogMainPageData(mainPageData);
-                
-            })
-            setDataLoaded(true);
-        }
-        loadMainPageData();
-        return () =>
-        {
-            window.removeEventListener('scroll', toggleVisible);
-        }
-    }, [blogMainPageDataCurrentLength]);
 
     const scrollToTop = () =>
     {
@@ -45,10 +25,6 @@ const BlogMainPage = (blogMainPageProps: BlogMainPageProps) => {
         });
     };
 
-    const continuesInfiniScroll = () => 
-    {
-        setBlogMainPageDataCurrentLength(blogMainPageDataCurrentLength + 10);
-    }
     const toggleVisible = () => {
         const scrolled = document.documentElement.scrollTop;
         if (scrolled > 250){
@@ -70,41 +46,14 @@ const BlogMainPage = (blogMainPageProps: BlogMainPageProps) => {
     return (
 
         //TODO: Padding may change, also making this margin instead of padding makes the page scroll horizontally  
-        <Grid sx={{ p: 8}} container /* spacing={2} */ direction="column" >
+        <Grid sx={{ p: 8}} container direction="column" >
             <Grid item xs={12} container>
                 <Grid item xs={12} md={8}>
-                    <Stack spacing={6}>
-                        {blogMainPageData && blogMainPageData.filter((item, index) => index < blogMainPageDataCurrentLength).map((blogPostData: any, index: number) =>
-                        {
-                            return(
-                                <>
-                                    <FeaturedBlogCard 
-                                        key={blogPostData.id}
-                                        id={blogPostData.id}
-                                        userId={blogPostData.userId}
-                                        title={blogPostData.title}
-                                        summary={blogPostData.summary}
-                                        body={blogPostData.body}
-                                        readTime={blogPostData.readTime}
-                                    />
-                                </>
-                            );
-                        })}
-                        
-                        {
-                            dataLoaded &&
-                         blogMainPageData.length !== blogMainPageDataCurrentLength && 
-                            <Button color="secondary" onClick={()=>{continuesInfiniScroll()}}>
-                                Show More?
-                            </Button>
-                        }
-                    </Stack>
+                    <BlogCardSection toggleVisible={toggleVisible}/>
                 </Grid>
                 <Divider orientation='vertical' variant="middle" flexItem  />
                 <Grid item xs={12} md={3}>
-                    <Stack>
-
-                    </Stack>
+                    <ChipSection/>
                 </Grid>
             </Grid>
             <Zoom in={showFab}>
