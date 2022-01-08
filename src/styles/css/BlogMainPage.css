@@ -1,0 +1,9 @@
+@media all and (max-width: 900px) {
+  .chip-section-container {
+    order: 1;
+    margin-bottom: 5rem;
+  }
+  .blogcard-section-container {
+    order: 2;
+  }
+}

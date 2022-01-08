@@ -15,9 +15,12 @@ const BlogLayout = (props: LayoutProps) =>
 {
 
     const [darkMode, setDarkMode] = useState(false);
+    const [navigationDrawerOpen, setNavigationDrawerOpen] = useState(false);
+
     useEffect(() => {
       setDarkMode(!!localStorage.getItem('darkModeCheck'));
     }, [darkMode])
+
     const muiTheme = createTheme(
     {
       palette: 
@@ -33,17 +36,32 @@ const BlogLayout = (props: LayoutProps) =>
         }
       }
     })
+
+    const toggleDarkMode = () =>
+    {
+    if(!!localStorage.getItem('darkModeCheck'))
+    {
+        localStorage.removeItem('darkModeCheck');
+        setDarkMode(false);
+    }
+    else
+    {
+        localStorage.setItem('darkModeCheck', 'darkModeActive');
+        setDarkMode(true);
+    }
+  }
+
     return (
 
     <ThemeProvider theme={muiTheme}>
-        <MuiAppBar setDarkMode={setDarkMode} darkMode={darkMode}>
+        <MuiAppBar navigationDrawerOpen={navigationDrawerOpen} setNavigationDrawerOpen={setNavigationDrawerOpen} toggleDarkMode={toggleDarkMode}>
             <Container >
 
             </ Container>
         </MuiAppBar>
-            <Outlet/>
+            <Outlet context={[darkMode, setDarkMode, navigationDrawerOpen, setNavigationDrawerOpen]}/>
     </ThemeProvider>
     )
 }
 
-export default BlogLayout
+export default BlogLayout;

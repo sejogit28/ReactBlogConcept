@@ -43,12 +43,14 @@ const BlogCardSection = (props: BlogCardSectionProps) =>
 
     return (
     <Stack spacing={6}>
-        {blogMainPageData && blogMainPageData.filter((item, index) => index < blogMainPageDataCurrentLength).map((blogPostData: any, index: number) =>
+        {blogMainPageData && blogMainPageData
+        .filter((item, index) => index < blogMainPageDataCurrentLength)
+        .map((blogPostData: any) =>
         {
             return(
-                <>
+                <div key={blogPostData.id}>
                     <FeaturedBlogCard 
-                        key={blogPostData.id}
+                        
                         id={blogPostData.id}
                         userId={blogPostData.userId}
                         title={blogPostData.title}
@@ -56,7 +58,7 @@ const BlogCardSection = (props: BlogCardSectionProps) =>
                         body={blogPostData.body}
                         readTime={blogPostData.readTime}
                     />
-                </>
+                </div>
             );
         })}
         

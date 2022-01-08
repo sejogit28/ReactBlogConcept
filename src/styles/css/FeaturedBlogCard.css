@@ -1,7 +1,7 @@
 .card-container {
   display: flex;
 }
-@media all and (max-width: 800px) {
+@media all and (max-width: 900px) {
   .card-container {
     /* When on medium sized screens, we center it by evenly distributing empty space around items */
     flex-direction: column;

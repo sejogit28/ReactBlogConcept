@@ -28,7 +28,7 @@ const BlogPreviewDrawer = (props: BlogPreviewDrawerProps) =>
                 onKeyDown={() =>{setsPreviewDrawerClosed()}}
             >
                     <Stack>
-                        <Typography variant="h4">
+                        <Typography variant="h5" gutterBottom>
                             {title}
                         </Typography>
                         <Divider />

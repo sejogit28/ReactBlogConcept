@@ -5,23 +5,24 @@ import BlogLayout from '../../components/layout/BlogLayout';
 
 function App() {
 
+  //TODO: IMPLEMENT TESTING, DO IT!!!
+  ///Testing all on front end elements
+  ////Maybe make a fake form to test?
+
 // Sometimes photos come back as broken.....
-//TODO: Set up blog preview drawer
+//TODO: Add a footer lol
 //TODO: Create blogPage
 //TODO: "Finish" navigation drawer
 
-//TODO: Start implementing testing
-///Testing all on front end elements
-////Maybe make a fake form to test?
 
 
   return (
         <Router>
-              <Routes>
-                <Route element={<BlogLayout />}>
-                  <Route path="/" element={<BlogMainPage />}/>
-                </Route>
-              </ Routes>
+          <Routes>
+            <Route element={<BlogLayout />}>
+              <Route path="/" element={<BlogMainPage />}/>
+            </Route>
+          </ Routes>
         </Router>
   );
 }

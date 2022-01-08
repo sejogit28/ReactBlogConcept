@@ -17,3 +17,5 @@ export function randomDate(start = new Date(2021, 6, 12), end = new Date()): Dat
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+export const topicOptions = ['React', '.NET', 'SQL','NoSQL', 'Advice', 
+                        'NeuroScience', 'Security', 'JavaScript', 'CSS', 'FrontEnd', 'BackEnd', 'Database', 'Azure']

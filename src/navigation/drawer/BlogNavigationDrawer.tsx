@@ -5,19 +5,20 @@ import
     ListItemIcon, ListItemText, Box
 } 
 from '@mui/material';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+import LoginIcon from '@mui/icons-material/Login';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 interface BlogNavigationDrawerProps 
 {
-    drawerOpen: boolean;
-    setDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    navigationDrawerOpen: boolean;
+    setNavigationDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const BlogNavigationDrawer = (props: BlogNavigationDrawerProps) => 
 {
-    const {drawerOpen, setDrawerOpen} = props
+    const {navigationDrawerOpen: drawerOpen, setNavigationDrawerOpen: setDrawerOpen} = props
     return (
         <SwipeableDrawer
             anchor={"left"}
@@ -31,26 +32,31 @@ const BlogNavigationDrawer = (props: BlogNavigationDrawerProps) =>
                 onClick={() =>{setDrawerOpen(false)}}
                 onKeyDown={() =>{setDrawerOpen(false)}}
             >
-            <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                <ListItem button key={text}>
+            <List>     
+                <ListItem button>
                     <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                        <HomeIcon />
                     </ListItemIcon>
-                    <ListItemText primary={text} />
+                    <ListItemText primary={'Home'} />
                 </ListItem>
-            ))}
-            </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                <ListItem button key={text}>
+                <ListItem button>
                     <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                        <SearchIcon />
                     </ListItemIcon>
-                    <ListItemText primary={text} />
+                    <ListItemText primary={'Search'} />
                 </ListItem>
-                ))}
+                <ListItem button>
+                    <ListItemIcon>
+                        <LoginIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={'Login'} />
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <AppRegistrationIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={'Register'} />
+                </ListItem>
             </List>
             </Box>
          </SwipeableDrawer>

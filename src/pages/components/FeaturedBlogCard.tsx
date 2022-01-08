@@ -13,7 +13,7 @@ import
   Grid 
 } from '@mui/material';
 
-import { randomDate, randomInt } from '../../services/Utils';
+import { randomDate } from '../../services/Utils';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 import PreviewIcon from '@mui/icons-material/Preview';
 
@@ -38,7 +38,6 @@ const FeaturedBlogCard = (props: BlogCardProps) =>
   const [previewDrawerOpen, setPreviewDrawerOpen] = useState(false);
   useEffect(() => {
     setRandomDateString(randomDate().toLocaleString());
-    console.log(randomInt(100));
     setPhotoString(`https://picsum.photos/id/${id}/200/100`);
     
   }, [id])

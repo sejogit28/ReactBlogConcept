@@ -10,8 +10,9 @@ import BlogNavigationDrawer from '../drawer/BlogNavigationDrawer';
 interface AppBarProps 
 {
     children: React.ReactElement;
-    setDarkMode:  React.Dispatch<React.SetStateAction<boolean>>;
-    darkMode: boolean;
+    toggleDarkMode:  () => void;
+    navigationDrawerOpen: boolean;
+    setNavigationDrawerOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
@@ -28,22 +29,7 @@ function HideOnScroll(appBarProps: AppBarProps)
 
 function MuiAppBar(appBarProps: AppBarProps): ReactElement 
 {
-  const {setDarkMode} = appBarProps;
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const toggleDarkMode = () =>
-  {
-    if(!!localStorage.getItem('darkModeCheck'))
-    {
-        localStorage.removeItem('darkModeCheck');
-        setDarkMode(false);
-    }
-    else
-    {
-        localStorage.setItem('darkModeCheck', 'darkModeActive');
-        setDarkMode(true);
-    }
-  }
-
+  const { toggleDarkMode, navigationDrawerOpen, setNavigationDrawerOpen } = appBarProps;
   
     return (
     <React.Fragment>
@@ -55,7 +41,7 @@ function MuiAppBar(appBarProps: AppBarProps): ReactElement
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} data-testid='appName'>
                 Best Blog Bro
               </Typography>
-              <IconButton onClick={() =>{ setDrawerOpen(true);}}>
+              <IconButton onClick={() =>{ setNavigationDrawerOpen(true);}}>
                 <MenuOpenIcon/>
               </IconButton>
               <IconButton onClick={() =>{ toggleDarkMode();}}>
@@ -65,7 +51,7 @@ function MuiAppBar(appBarProps: AppBarProps): ReactElement
           </AppBar>
         </HideOnScroll>
       <Toolbar />
-          <BlogNavigationDrawer setDrawerOpen={setDrawerOpen} drawerOpen={drawerOpen}/>
+          <BlogNavigationDrawer setNavigationDrawerOpen={setNavigationDrawerOpen} navigationDrawerOpen={navigationDrawerOpen}/>
     </React.Fragment>
     )
 }
